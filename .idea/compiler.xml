@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="validation-tools" />
+        <module name="compress-tools" />
+        <module name="log-tools" />
+        <module name="qrcode-tools" />
+        <module name="common-tools" />
+        <module name="encrypt-tools" />
+        <module name="baidu-tools" />
+        <module name="http-tools" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="baidu-tools" target="1.8" />
+      <module name="common-tools" target="1.8" />
+      <module name="compress-tools" target="1.8" />
+      <module name="encrypt-tools" target="1.8" />
+      <module name="http-tools" target="1.8" />
+      <module name="log-tools" target="1.8" />
+      <module name="qrcode-tools" target="1.8" />
+      <module name="test-log-tools" target="1.8" />
+      <module name="tools-parent" target="1.5" />
+      <module name="validation-tools" target="1.8" />
+      <module name="zip-tools" target="1.5" />
+      <module name="zongf-tools-parent" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="baidu-tools" options="-parameters" />
+      <module name="common-tools" options="-parameters" />
+      <module name="compress-tools" options="-parameters" />
+      <module name="encrypt-tools" options="-parameters" />
+      <module name="http-tools" options="-parameters" />
+      <module name="log-tools" options="-parameters" />
+      <module name="qrcode-tools" options="-parameters" />
+      <module name="test-log-tools" options="-parameters" />
+      <module name="validation-tools" options="-parameters" />
+    </option>
+  </component>
+</project>

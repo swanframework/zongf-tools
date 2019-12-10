@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/baidu-tools/baidu-tools.iml" filepath="$PROJECT_DIR$/baidu-tools/baidu-tools.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common-tools/common-tools.iml" filepath="$PROJECT_DIR$/common-tools/common-tools.iml" />
+      <module fileurl="file://$PROJECT_DIR$/compress-tools/compress-tools.iml" filepath="$PROJECT_DIR$/compress-tools/compress-tools.iml" />
+      <module fileurl="file://$PROJECT_DIR$/encrypt-tools/encrypt-tools.iml" filepath="$PROJECT_DIR$/encrypt-tools/encrypt-tools.iml" />
+      <module fileurl="file://$PROJECT_DIR$/http-tools/http-tools.iml" filepath="$PROJECT_DIR$/http-tools/http-tools.iml" />
+      <module fileurl="file://$PROJECT_DIR$/log-tools/log-tools.iml" filepath="$PROJECT_DIR$/log-tools/log-tools.iml" />
+      <module fileurl="file://$PROJECT_DIR$/qrcode-tools/qrcode-tools.iml" filepath="$PROJECT_DIR$/qrcode-tools/qrcode-tools.iml" />
+      <module fileurl="file://$PROJECT_DIR$/validation-tools/validation-tools.iml" filepath="$PROJECT_DIR$/validation-tools/validation-tools.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zongf-tools-parent/zongf-tools-parent.iml" filepath="$PROJECT_DIR$/zongf-tools-parent/zongf-tools-parent.iml" />
+    </modules>
+  </component>
+</project>

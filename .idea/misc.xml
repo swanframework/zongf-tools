@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/log-tools/pom.xml" />
+        <option value="$PROJECT_DIR$/common-tools/pom.xml" />
+        <option value="$PROJECT_DIR$/validation-tools/pom.xml" />
+        <option value="$PROJECT_DIR$/http-tools/pom.xml" />
+        <option value="$PROJECT_DIR$/qrcode-tools/pom.xml" />
+        <option value="$PROJECT_DIR$/encrypt-tools/pom.xml" />
+        <option value="$PROJECT_DIR$/baidu-tools/pom.xml" />
+        <option value="$PROJECT_DIR$/zongf-tools-parent/pom.xml" />
+        <option value="$PROJECT_DIR$/compress-tools/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>
