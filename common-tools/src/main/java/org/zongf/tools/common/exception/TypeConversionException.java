@@ -1,30 +1,24 @@
 package org.zongf.tools.common.exception;
 
-import org.zongf.tools.common.constant.ExceptionCode;
-
 /** 类型转换异常
  * @author zongf
  * @date 2019-07-01
  */
-public class TypeConversionException extends BaseRuntimeException {
+public class TypeConversionException extends AbsBaseException {
 
-    public TypeConversionException() {
-        super(ExceptionCode.TYPE_CONVERSION_EXCEPTION);
+    public TypeConversionException(String message, Object... params) {
+        super(message, params);
     }
 
-    public TypeConversionException(String message) {
-        super(ExceptionCode.TYPE_CONVERSION_EXCEPTION, message);
+    public TypeConversionException(Throwable cause, String message, Object... params) {
+        super(cause, message, params);
     }
 
-    public TypeConversionException(String message, Throwable cause) {
-        super(ExceptionCode.TYPE_CONVERSION_EXCEPTION, message, cause);
+    public TypeConversionException(int code, String message, Object... params) {
+        super(code, message, params);
     }
 
-    public TypeConversionException(Throwable cause) {
-        super(ExceptionCode.TYPE_CONVERSION_EXCEPTION, cause);
-    }
-
-    public TypeConversionException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-        super(ExceptionCode.TYPE_CONVERSION_EXCEPTION, message, cause, enableSuppression, writableStackTrace);
+    public TypeConversionException(Throwable cause, int code, String message, String... params) {
+        super(cause, code, message, params);
     }
 }

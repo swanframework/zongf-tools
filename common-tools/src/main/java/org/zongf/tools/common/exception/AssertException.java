@@ -1,30 +1,24 @@
 package org.zongf.tools.common.exception;
 
-import org.zongf.tools.common.constant.ExceptionCode;
-
 /** 断言异常
  * @author zongf
  * @date 2019-07-01
  */
-public class AssertException extends BaseRuntimeException {
+public class AssertException extends AbsBaseException {
 
-    public AssertException() {
-        super(ExceptionCode.ASSERT_EXCEPTION);
+    public AssertException(String message, Object... params) {
+        super(message, params);
     }
 
-    public AssertException(String message) {
-        super(ExceptionCode.ASSERT_EXCEPTION, message);
+    public AssertException(Throwable cause, String message, Object... params) {
+        super(cause, message, params);
     }
 
-    public AssertException(String message, Throwable cause) {
-        super(ExceptionCode.ASSERT_EXCEPTION, message, cause);
+    public AssertException(int code, String message, Object... params) {
+        super(code, message, params);
     }
 
-    public AssertException(Throwable cause) {
-        super(ExceptionCode.ASSERT_EXCEPTION, cause);
-    }
-
-    public AssertException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-        super(ExceptionCode.ASSERT_EXCEPTION, message, cause, enableSuppression, writableStackTrace);
+    public AssertException(Throwable cause, int code, String message, String... params) {
+        super(cause, code, message, params);
     }
 }

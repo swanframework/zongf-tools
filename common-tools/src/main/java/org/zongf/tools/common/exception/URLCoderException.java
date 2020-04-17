@@ -1,30 +1,25 @@
 package org.zongf.tools.common.exception;
 
-import org.zongf.tools.common.constant.ExceptionCode;
 
 /** URL 编码异常
  * @author zongf
  * @date 2019-12-04
  */
-public class URLCoderException extends BaseRuntimeException{
+public class URLCoderException extends AbsBaseException {
 
-    public URLCoderException() {
-        super(ExceptionCode.URL_CODER_EXCEPTION);
+    public URLCoderException(String message, Object... params) {
+        super(message, params);
     }
 
-    public URLCoderException(String message) {
-        super(ExceptionCode.URL_CODER_EXCEPTION, message);
+    public URLCoderException(Throwable cause, String message, Object... params) {
+        super(cause, message, params);
     }
 
-    public URLCoderException(String message, Throwable cause) {
-        super(ExceptionCode.URL_CODER_EXCEPTION, message, cause);
+    public URLCoderException(int code, String message, Object... params) {
+        super(code, message, params);
     }
 
-    public URLCoderException(Throwable cause) {
-        super(ExceptionCode.URL_CODER_EXCEPTION, cause);
-    }
-
-    public URLCoderException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-        super(ExceptionCode.URL_CODER_EXCEPTION, message, cause, enableSuppression, writableStackTrace);
+    public URLCoderException(Throwable cause, int code, String message, String... params) {
+        super(cause, code, message, params);
     }
 }
