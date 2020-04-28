@@ -38,7 +38,7 @@ public class URLCoderUtil {
         try {
             return URLEncoder.encode(str, charset.toString());
         } catch (UnsupportedEncodingException e) {
-            throw new URLCoderException("url 编码异常, 字符串:" + str, e);
+            throw new URLCoderException(e, "url 编码异常, 字符串:%s", str);
         }
     }
 
@@ -67,7 +67,7 @@ public class URLCoderUtil {
         try {
             return URLDecoder.decode(str, charset.toString());
         } catch (UnsupportedEncodingException e) {
-            throw new URLCoderException("url 解码异常, 字符串:" + str, e);
+            throw new URLCoderException(e, "url 解码异常, 字符串:%s", str);
         }
     }
 

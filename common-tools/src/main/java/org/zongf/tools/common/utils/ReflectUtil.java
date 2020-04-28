@@ -31,7 +31,7 @@ public class ReflectUtil {
             }
             writeMethod.invoke(target, value);
         } catch (Exception e) {
-            throw new ReflectException("对象属性赋值异常!",e);
+            throw new ReflectException(e, "对象属性赋值异常!");
         }
     }
 
@@ -49,7 +49,7 @@ public class ReflectUtil {
             Method readMethod = descriptor.getReadMethod();
             return (T) readMethod.invoke(target);
         } catch (Exception e) {
-            throw new ReflectException("获取对象属性值异常",e);
+            throw new ReflectException(e, "获取对象属性值异常");
         }
     }
 
@@ -114,7 +114,7 @@ public class ReflectUtil {
 
             return (T) declaredField.get(target);
         } catch (Exception e) {
-            throw new ReflectException("获取对象属性值异常!",e);
+            throw new ReflectException(e, "获取对象属性值异常!");
         } finally {
             // 如果字段不为空, 且修改了访问属性, 则回滚访问属性
             if (declaredField != null && changeAccessible) {

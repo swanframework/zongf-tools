@@ -64,7 +64,7 @@ public class StringUtil {
 
             return (T) value;
         } catch (Exception e) {
-            throw new TypeConversionException("类型转换异常!", e);
+            throw new TypeConversionException(e, "类型转换异常!");
         }
 
     }

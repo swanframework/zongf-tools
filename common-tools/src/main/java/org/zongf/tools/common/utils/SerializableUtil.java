@@ -35,7 +35,7 @@ public class SerializableUtil {
             return bos.toByteArray();
 
         } catch (Exception ex) {
-            throw new SerializableException(ex);
+            throw new SerializableException(ex, "序列化异常");
         }finally {
             CloseUtil.close(bos, oos);
         }
@@ -65,7 +65,7 @@ public class SerializableUtil {
             return  (T) ois.readObject();
 
         } catch (Exception ex) {
-            throw new SerializableException(ex);
+            throw new SerializableException(ex, "反序列化异常");
         }finally {
             CloseUtil.close(ois, bis);
         }
