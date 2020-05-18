@@ -5,6 +5,7 @@ import org.zongf.tools.common.exception.ReflectException;
 
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
@@ -259,6 +260,22 @@ public class ReflectUtil {
                 .collect(Collectors.toList());
 
         return methods;
+    }
+
+    /** 调用方法
+     * @param method 方法名
+     * @param object 实例
+     * @param args 方法参数
+     * @return Object
+     * @author zongf
+     * @date 2020-05-18
+     */
+    public static Object invokeMethod(Method method, Object object, Object... args) {
+        try {
+           return method.invoke(object, args);
+        } catch (Exception e) {
+            throw new ReflectException("调用方法异常, 方法名:{}", method.getName());
+        }
     }
 
 }
