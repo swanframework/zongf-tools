@@ -28,4 +28,34 @@ public class StringCaseUtil {
         return str.substring(0, 1).toLowerCase() + str.substring(1);
     }
 
+    /** 判断字符是否是大写字母
+     * @param c 字符
+     * @return boolean
+     * @author zongf
+     * @date 2020-05-18
+     */
+    public static boolean isUpperCase(char c) {
+        return Character.isUpperCase(c);
+    }
+
+    /** 判断字符是否是小写字母
+     * @param c 字符
+     * @return boolean
+     * @author zongf
+     * @date 2020-05-18
+     */
+    public static boolean isLowerCase(char c) {
+        return Character.isLowerCase(c);
+    }
+
+    /** 判断字符是否是数字
+     * @param c 字符
+     * @return boolean
+     * @author zongf
+     * @date 2020-05-18
+     */
+    public static boolean isDigit(char c) {
+        return Character.isDigit(c);
+    }
+
 }
