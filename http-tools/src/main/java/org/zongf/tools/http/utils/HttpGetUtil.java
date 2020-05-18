@@ -1,7 +1,7 @@
 package org.zongf.tools.http.utils;
 
 import com.alibaba.fastjson.TypeReference;
-import org.zongf.tools.http.config.HttpConfig;
+import org.zongf.tools.http.config.HttpRequestConfig;
 
 import java.util.Map;
 
@@ -11,7 +11,7 @@ import java.util.Map;
  */
 public class HttpGetUtil {
 
-    /**@see HttpGetUtil#get(java.lang.String, java.util.Map, java.util.Map, java.lang.Class, org.zongf.tools.http.config.HttpConfig)
+    /**@see HttpGetUtil#get(java.lang.String, java.util.Map, java.util.Map, java.lang.Class, HttpRequestConfig)
      * @return T
      * @author zongf
      * @date 2020-04-28
@@ -20,26 +20,26 @@ public class HttpGetUtil {
         return get(url, null, params, resultType, null);
     }
 
-    /**@see HttpGetUtil#get(java.lang.String, java.util.Map, java.util.Map, java.lang.Class, org.zongf.tools.http.config.HttpConfig)
+    /**@see HttpGetUtil#get(java.lang.String, java.util.Map, java.util.Map, java.lang.Class, HttpRequestConfig)
      * @return T
      * @author zongf
      * @date 2020-04-28
      */
-    public static <T> T get(String url, Map<String, Object> params, TypeReference<T> resultType, HttpConfig config) {
+    public static <T> T get(String url, Map<String, Object> params, TypeReference<T> resultType, HttpRequestConfig config) {
         return get(url, null, params, resultType, config);
     }
 
-    /**@see HttpGetUtil#get(java.lang.String, java.util.Map, java.util.Map, java.lang.Class, org.zongf.tools.http.config.HttpConfig)
+    /**@see HttpGetUtil#get(java.lang.String, java.util.Map, java.util.Map, java.lang.Class, HttpRequestConfig)
      * @return T
      * @author zongf
      * @date 2020-04-28
      */
-    public static <T> T get(String url, Map<String, String> headers, Map<String, Object> params, TypeReference<T> resultType, HttpConfig config) {
+    public static <T> T get(String url, Map<String, String> headers, Map<String, Object> params, TypeReference<T> resultType, HttpRequestConfig config) {
         String response = HttpUtil.postForm(url, headers, params, config);
         return HttpUtil.parseResponse(response, resultType);
     }
 
-    /**@see HttpGetUtil#get(java.lang.String, java.util.Map, java.util.Map, java.lang.Class, org.zongf.tools.http.config.HttpConfig)
+    /**@see HttpGetUtil#get(java.lang.String, java.util.Map, java.util.Map, java.lang.Class, HttpRequestConfig)
      * @return T
      * @author zongf
      * @date 2020-04-28
@@ -48,12 +48,12 @@ public class HttpGetUtil {
         return get(url, null, params, resultType, null);
     }
 
-    /**@see HttpGetUtil#get(java.lang.String, java.util.Map, java.util.Map, java.lang.Class, org.zongf.tools.http.config.HttpConfig)
+    /**@see HttpGetUtil#get(java.lang.String, java.util.Map, java.util.Map, java.lang.Class, HttpRequestConfig)
      * @return T
      * @author zongf
      * @date 2020-04-28
      */
-    public static <T> T get(String url, Map<String, Object> params, Class<T> resultType, HttpConfig config) {
+    public static <T> T get(String url, Map<String, Object> params, Class<T> resultType, HttpRequestConfig config) {
         return get(url, null, params, resultType, config);
     }
 
@@ -67,8 +67,8 @@ public class HttpGetUtil {
      * @author zongf
      * @date 2020-04-28
      */
-    public static <T> T get(String url, Map<String, String> headers, Map<String, Object> params, Class<T> resultType, HttpConfig config) {
-        String response = HttpUtil.postForm(url, headers, params, config);
+    public static <T> T get(String url, Map<String, String> headers, Map<String, Object> params, Class<T> resultType, HttpRequestConfig config) {
+        String response = HttpUtil.get(url, headers, params, config);
         return HttpUtil.parseResponse(response, resultType);
     }
 

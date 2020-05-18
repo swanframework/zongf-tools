@@ -3,11 +3,11 @@ package org.zongf.tools.http.config;
 import org.apache.http.HttpHost;
 import org.zongf.tools.common.enums.CharsetEnum;
 
-/**
+/** http请求配置类
  * @author zongf
  * @date 2020-04-28
  */
-public class HttpConfig {
+public class HttpRequestConfig {
 
     /** 客户端和服务器建立连接的超时时间, 默认10秒, 超时后抛出: ConnectionTimeOutException */
     public static int DEFAULT_CONNECT_TIMEOUT = 10_000;
@@ -16,21 +16,21 @@ public class HttpConfig {
     public static int DEFAULT_READ_TIMEOUT = 30_000;
 
     /** 连接超时时间, 单位毫秒 */
-    private Integer connectTimeout;
+    private Integer connectTimeout = DEFAULT_CONNECT_TIMEOUT;
 
     /** 读取超时时间, 单位毫秒 */
-    private Integer readTimeout;
+    private Integer readTimeout = DEFAULT_READ_TIMEOUT;
 
     /** 响应状态码 */
-    private CharsetEnum responseCharset;
+    private CharsetEnum responseCharset = CharsetEnum.UTF8;
 
     /** 请求体状态码 */
-    private CharsetEnum requestCharset;
+    private CharsetEnum requestCharset = CharsetEnum.UTF8;
 
     /** 代理服务器 */
     private HttpHost httpProxy;
 
-    public HttpConfig() {
+    public HttpRequestConfig() {
     }
 
     public void setConnectTimeout(Integer connectTimeout){
