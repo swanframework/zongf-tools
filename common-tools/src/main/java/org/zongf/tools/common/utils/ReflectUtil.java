@@ -6,6 +6,12 @@ import org.zongf.tools.common.exception.ReflectException;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /** 反射工具类
  * @author zongf
@@ -121,6 +127,138 @@ public class ReflectUtil {
                 declaredField.setAccessible(false);
             }
         }
+    }
+
+    /** 获取类所有声明的属性
+     * @param clz
+     * @param includeParents 是否递归父类
+     * @return List<Field>
+     * @author zongf
+     * @date 2020-05-18
+     */
+    public static List<Field> getDeclaredFields(Class clz, boolean includeParents) {
+        LinkedHashSet<Field> fields = new LinkedHashSet();
+
+        // 如果父类不是Object类, 则递归获取父类
+        if (includeParents && !Object.class.equals(clz.getSuperclass())) {
+            fields.addAll(getDeclaredFields(clz.getSuperclass(), includeParents));
+        }
+
+        // 获取当前类声明的属性
+        for (Field declaredField : clz.getDeclaredFields()) {
+            fields.add(declaredField);
+        }
+
+        return new ArrayList<>(fields);
+    }
+
+    /** 获取类所有声明的属性名
+     * @param clz 类
+     * @param searchParents 是否递归父类
+     * @return List<String>
+     * @author zongf
+     * @date 2020-05-18
+     */
+    public static List<String> getDeclaredFieldNames(Class clz, boolean searchParents){
+        List<Field> declaredFields = getDeclaredFields(clz, searchParents);
+        return declaredFields.stream().map(field -> field.getName()).collect(Collectors.toList());
+    }
+
+    /** 假定此方法为setter方法, 解析该方法对应的属性名
+     * @param getMethod 方法名
+     * @return String 如果不以get/is开头, 则返回null
+     * @author zongf
+     * @date 2020-05-18
+     */
+    public static String parseFieldNameAsGetterMethod(Method getMethod) {
+        String methodName = getMethod.getName();
+        String fieldName = null;
+
+        if (boolean.class.equals(getMethod.getReturnType())) {
+            if ("is".equals(methodName.substring(0, 2))) {
+                fieldName = methodName.substring(2);
+            }
+        }else {
+            if ("get".equals(methodName.substring(0, 3))) {
+                fieldName = methodName.substring(3);
+            }
+        }
+
+        if (fieldName == null || StringCaseUtil.isUpperCase(fieldName.charAt(1))) {
+            return fieldName;
+        }else {
+            return StringCaseUtil.firstLower(fieldName);
+        }
+    }
+
+    /** 假定此方法为setter方法, 解析该方法对应的属性名
+     * @param setMethod 方法名
+     * @return String
+     * @author zongf
+     * @date 2020-05-18
+     */
+    public static String parseFieldNameAsSetterMethod(Method setMethod) {
+        String methodName = setMethod.getName();
+        String fieldName = null;
+
+        if ("set".equals(methodName.substring(0, 3))) {
+            fieldName = methodName.substring(3);
+        }
+        if (fieldName == null || StringCaseUtil.isUpperCase(fieldName.charAt(1))) {
+            return fieldName;
+        }else {
+            return StringCaseUtil.firstLower(fieldName);
+        }
+    }
+
+    /** 获取类可访问(public)的所有getter方法
+     * @param clz
+     * @return List<Method>
+     * @author zongf
+     * @date 2020-05-18
+     */
+    public static List<Method> getGetterMethods(Class clz) {
+
+        // 获取所有可访问的公用方法
+        List<Method> methods = Arrays.asList(clz.getMethods());
+
+        // 获取所有声明的属性名
+        List<String> declaredFieldNames = getDeclaredFieldNames(clz, true);
+
+        // 过滤Objec.class 中声明的方法
+        methods = methods.stream()
+                .filter(method -> !Object.class.equals(method.getDeclaringClass()))
+                .filter(method -> !Modifier.isStatic(method.getModifiers()))
+                .filter(method -> method.getParameters().length == 0)
+                .filter(method -> declaredFieldNames.contains(parseFieldNameAsGetterMethod(method)))
+                .collect(Collectors.toList());
+
+        return methods;
+    }
+
+    /** 获取类可访问(public)的所有getter方法
+     * @param clz
+     * @return List<Method>
+     * @author zongf
+     * @date 2020-05-18
+     */
+    public static List<Method> getSetterMethods(Class clz) {
+
+        // 获取所有可访问的公用方法
+        List<Method> methods = Arrays.asList(clz.getMethods());
+
+        // 获取所有声明的属性名
+        List<String> declaredFieldNames = getDeclaredFieldNames(clz, true);
+
+        // 过滤Objec.class 中声明的方法
+        methods = methods.stream()
+                .filter(method -> !Object.class.equals(method.getDeclaringClass()))
+                .filter(method -> !Modifier.isStatic(method.getModifiers()))
+                .filter(method -> method.getParameters().length == 1)
+                .filter(method -> declaredFieldNames.contains(parseFieldNameAsSetterMethod(method)))
+                .collect(Collectors.toList());
+
+        return methods;
     }
 
 }
