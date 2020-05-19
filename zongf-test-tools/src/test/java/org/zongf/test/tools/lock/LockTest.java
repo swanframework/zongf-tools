@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.zongf.tools.common.lock.ILocker;
 import org.zongf.tools.common.utils.LockUtil;
+import org.zongf.tools.spring.utils.SpringContextUtil;
 
 import java.time.LocalDateTime;
 
@@ -37,4 +38,5 @@ public class LockTest {
         System.out.println(Thread.currentThread().getName() + ":" + LocalDateTime.now().toString());
         return name;
     }
+
 }
