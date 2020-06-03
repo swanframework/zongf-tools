@@ -23,6 +23,46 @@ public final class OgnlUtil {
     private OgnlUtil() {
     }
 
+    /** 获取String类型的值
+     * @see #getValue(String, Object)
+     * @throws java.lang.ClassCastException
+     */
+    public static String getStringValue(String expression, Object root) {
+        return (String) getValue(expression, root);
+    }
+
+    /** 获取Integer类型的值
+     * @see #getValue(String, Object)
+     * @throws java.lang.ClassCastException
+     */
+    public static Integer getIntValue(String expression, Object root) {
+        return (Integer) getValue(expression, root);
+    }
+
+    /** 获取Float类型的值
+     * @see #getValue(String, Object)
+     * @throws java.lang.ClassCastException
+     */
+    public static Float getFloatValue(String expression, Object root) {
+        return (Float) getValue(expression, root);
+    }
+
+    /** 获取Double类型的值
+     * @see #getValue(String, Object)
+     * @throws java.lang.ClassCastException
+     */
+    public static Double getDoubleValue(String expression, Object root) {
+        return (Double) getValue(expression, root);
+    }
+
+    /** 获取Boolean类型的值
+     * @see #getValue(String, Object)
+     * @throws java.lang.ClassCastException
+     */
+    public static Boolean getBooleanValue(String expression, Object root) {
+        return (Boolean) getValue(expression, root);
+    }
+
     /**
      * 获取表达式值, 开启表达式缓存
      *
@@ -38,7 +78,6 @@ public final class OgnlUtil {
 
     /**
      * 获取表达式值
-     *
      * @param expression      表达式
      * @param root            根节点
      * @param cacheExpression 是否缓存表达式
