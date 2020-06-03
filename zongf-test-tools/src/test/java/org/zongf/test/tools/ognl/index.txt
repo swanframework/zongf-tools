@@ -18,4 +18,10 @@
 
 # 逗号运算符
 * 逗号运算符用于分割两个表达式, 其中最后一个表达式作为整个表达式的返回值
-*
+
+## 索引方式
+* 数组和集合使用数字索引,格式: name[$idx]
+* Java Bean和Map有两种索引方式,但需要拥有对应 set/get/is 方法
+    * 格式: name.$field , 如: emp.name
+    * 格式: name[$field], 如: emp['name'], emp['na' + 'me']
+

@@ -131,4 +131,40 @@ public class OgnlUtilTest {
         System.out.println("筛选最后一个字符串:" + OgnlUtil.getValue(root, "array.{$ #this instanceof String}"));
 
     }
+
+    /** 内置方法 */
+    @Test
+    public void testIndex() {
+
+        Map<String, String> map = new HashMap<>();
+        map.put("A", "aaa");
+        map.put("B", "bbb");
+        map.put("C", "ccc");
+
+        Set<String> set = new HashSet<>();
+        set.add("java");
+        set.add("linux");
+        set.add("js");
+
+        Map<String, Object> root = new HashMap<>();
+        root.put("map", map);
+        root.put("list", Arrays.asList("java", "linux", "js"));
+        root.put("set", set);
+
+        System.out.println("map.isEmpty:" + OgnlUtil.getValue(root, "map.isEmpty"));
+        System.out.println("map.size:" + OgnlUtil.getValue(root, "map.size"));
+        System.out.println("map.keys:" + OgnlUtil.getValue(root, "map.keys"));
+        System.out.println("map.values:" + OgnlUtil.getValue(root, "map.values"));
+
+        System.out.println("set.isEmpty:" + OgnlUtil.getValue(root, "set.isEmpty"));
+        System.out.println("set.size:" + OgnlUtil.getValue(root, "set.size"));
+        System.out.println("set.iterator:" + OgnlUtil.getValue(root, "set.iterator").getClass());
+        System.out.println("set.hasNext:" + OgnlUtil.getValue(root, "set.iterator.hasNext()"));
+
+
+        Iterator iterator = (Iterator) OgnlUtil.getValue(root, "set.iterator");
+        System.out.println(iterator.next());
+        System.out.println(iterator.next());
+
+    }
 }
