@@ -24,43 +24,43 @@ public final class OgnlUtil {
     }
 
     /** 获取String类型的值
-     * @see #getValue(String, Object)
+     * @see #getValue(Object, String)
      * @throws java.lang.ClassCastException
      */
-    public static String getStringValue(String expression, Object root) {
-        return (String) getValue(expression, root);
+    public static String getStringValue(Object root, String expression) {
+        return (String) getValue(root, expression);
     }
 
     /** 获取Integer类型的值
-     * @see #getValue(String, Object)
+     * @see #getValue(Object, String)
      * @throws java.lang.ClassCastException
      */
-    public static Integer getIntValue(String expression, Object root) {
-        return (Integer) getValue(expression, root);
+    public static Integer getIntValue(Object root, String expression) {
+        return (Integer) getValue(root, expression);
     }
 
     /** 获取Float类型的值
-     * @see #getValue(String, Object)
+     * @see #getValue(Object, String)
      * @throws java.lang.ClassCastException
      */
-    public static Float getFloatValue(String expression, Object root) {
-        return (Float) getValue(expression, root);
+    public static Float getFloatValue(Object root, String expression) {
+        return (Float) getValue(root, expression);
     }
 
     /** 获取Double类型的值
-     * @see #getValue(String, Object)
+     * @see #getValue(Object, String)
      * @throws java.lang.ClassCastException
      */
-    public static Double getDoubleValue(String expression, Object root) {
-        return (Double) getValue(expression, root);
+    public static Double getDoubleValue(Object root, String expression) {
+        return (Double) getValue(root, expression);
     }
 
     /** 获取Boolean类型的值
-     * @see #getValue(String, Object)
+     * @see #getValue(Object, String)
      * @throws java.lang.ClassCastException
      */
-    public static Boolean getBooleanValue(String expression, Object root) {
-        return (Boolean) getValue(expression, root);
+    public static Boolean getBooleanValue(Object root, String expression) {
+        return (Boolean) getValue(root, expression);
     }
 
     /**
@@ -72,8 +72,8 @@ public final class OgnlUtil {
      * @author zongf
      * @date 2020-06-03
      */
-    public static Object getValue(String expression, Object root) {
-        return getValue(expression, root, true);
+    public static Object getValue(Object root, String expression) {
+        return getValue(root, expression, true);
     }
 
     /**
@@ -85,7 +85,7 @@ public final class OgnlUtil {
      * @author zongf
      * @date 2020-06-03
      */
-    public static Object getValue(String expression, Object root, boolean cacheExpression) {
+    public static Object getValue(Object root, String expression, boolean cacheExpression) {
         try {
             // 基于root创建上下文, 不允许修改context
             Map context = Ognl.createDefaultContext(root, MEMBER_ACCESS);
@@ -121,6 +121,41 @@ public final class OgnlUtil {
             parsedExpression = Ognl.parseExpression(expression);
         }
         return parsedExpression;
+    }
+
+    /** 为表达式赋值 <br/>
+     *  当表达式不能表示赋值时, 会抛出异常
+     * @see #setValue(Object, String, String, Boolean)
+     * @throws ognl.InappropriateExpressionException
+     */
+    public static void setValue(Object root, String expression, String value) {
+        setValue(root, expression, value, true);
+    }
+
+    /** 表达式赋值 <br/>
+     *  当表达式不能表示赋值时, 会抛出异常
+     * @param root 起始对象
+     * @param expression 表达式
+     * @param value 值
+     * @param cacheExpression 缓存表达式
+     * @throws ognl.InappropriateExpressionException
+     * @author zongf
+     * @date 2020-06-03
+     */
+    public static void setValue(Object root, String expression, String value, Boolean cacheExpression) {
+
+        try {
+            // 基于root创建上下文, 不允许修改context
+            Map context = Ognl.createDefaultContext(root, MEMBER_ACCESS);
+
+            // 解析表达式
+            Object exp = parseExpression(expression, cacheExpression);
+
+            // 赋值
+            Ognl.setValue(exp, context, root, value);
+        } catch (OgnlException e) {
+            throw new RuntimeException("ognl 表达式解析异常, 表达式:" + expression + "", e);
+        }
     }
 
 }
