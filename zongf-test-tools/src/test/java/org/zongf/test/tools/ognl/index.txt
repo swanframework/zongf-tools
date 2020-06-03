@@ -1,0 +1,21 @@
+
+
+## Ognl 中的常量(由称字面量)
+* 字符串常量: 用单引号或双引号包裹的字符串
+* 字符常量: 用单引号包裹的字符
+* 数字常量:
+    * 默认整数解析为Integer, 浮点型解析为Double, 可添加后缀改变类型, 后缀标识不区分大小写
+    * f: 解析为Float, 如12.0f
+    * d: 解析为Double, 如12.0d
+    * h: 解析为BigInteger, 如12h
+    * b: 解析为BigDecimal, 如12b
+* 布尔常量: true/false
+* Null常量: null
+
+## 表达式赋值
+* 当表达式不能表示赋值时, 会抛出异常InappropriateExpressionException
+* 当表达式可表示赋值时, 可通过Ognl.setValue(param..) 进行赋值
+
+# 逗号运算符
+* 逗号运算符用于分割两个表达式, 其中最后一个表达式作为整个表达式的返回值
+*
