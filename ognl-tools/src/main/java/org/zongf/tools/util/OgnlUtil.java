@@ -4,6 +4,8 @@ import ognl.Ognl;
 import ognl.OgnlException;
 import org.zongf.tools.ognl.OgnlMemberAccess;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -61,6 +63,22 @@ public final class OgnlUtil {
      */
     public static Boolean getBooleanValue(Object root, String expression) {
         return (Boolean) getValue(root, expression);
+    }
+
+    /** 获取BigInteger类型的值
+     * @see #getValue(Object, String)
+     * @throws java.lang.ClassCastException
+     */
+    public static BigInteger getBigIntegerValue(Object root, String expression) {
+        return (BigInteger) getValue(root, expression);
+    }
+
+    /** 获取BigDecimal类型的值
+     * @see #getValue(Object, String)
+     * @throws java.lang.ClassCastException
+     */
+    public static BigDecimal getBigDecimalValue(Object root, String expression) {
+        return (BigDecimal) getValue(root, expression);
     }
 
     /**
