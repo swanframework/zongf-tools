@@ -1,15 +1,17 @@
 
 
 ## Ognl 中的常量(由称字面量)
-* 字符串常量: 用单引号或双引号包裹的字符串
-* 字符常量: 用单引号包裹的字符
+> ognl 表达式
+
+* 字符串常量: 用单引号或双引号包裹的字符串, 被解析为String 类型
+* 字符常量: 用单引号包裹的字符, 被解析为Character 类型
 * 数字常量:
     * 默认整数解析为Integer, 浮点型解析为Double, 可添加后缀改变类型, 后缀标识不区分大小写
     * f: 解析为Float, 如12.0f
     * d: 解析为Double, 如12.0d
     * h: 解析为BigInteger, 如12h
     * b: 解析为BigDecimal, 如12b
-* 布尔常量: true/false
+* 布尔常量: true/false, 被解析为Boolean 类型
 * Null常量: null
 
 ## 表达式赋值
@@ -24,4 +26,14 @@
 * Java Bean和Map有两种索引方式,但需要拥有对应 set/get/is 方法
     * 格式: name.$field , 如: emp.name
     * 格式: name[$field], 如: emp['name'], emp['na' + 'me']
+
+## Ognl 属性访问
+* 对象属性: $obj.$name 或 $obj[$name], 如 emp.name, emp['name'], emp['na' + 'me']
+* 对象方法: $obj.$method([$param1, $param2..]), 如emp.hello('zhangsan')
+* 静态属性: @$classFullName@$staticField, 如: @org.zongf.DateUtil@D
+* 静态方法: @$classFullName@$staticMethod([$param1,$param2...]), 如@org.zongf.DateUtil@now()
+* 数组/集合: $array[$idx], 如: books[1]
+* map: $map[$key], 如: map['A']
+
+|
 

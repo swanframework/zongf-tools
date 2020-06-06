@@ -1,9 +1,12 @@
 package org.zongf.test.tools.ognl;
 
 import ognl.OgnlException;
+import org.junit.Assert;
 import org.junit.Test;
 import org.zongf.tools.util.OgnlUtil;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.*;
 
 /**
@@ -12,42 +15,55 @@ import java.util.*;
  */
 public class OgnlUtilTest {
 
-    @Test
-    public void test1() throws OgnlException {
-
-        Employee.Department department = new Employee.Department();
-        department.setName("研发部");
-        department.setManager("小张");
-
-        Employee emp = new Employee();
-        emp.setId(1001);
-        emp.setName("zhangsan");
-        emp.setEmpNo("EMP_1001");
-        emp.setDepartment(department);
-
-        Map<String, Object> root = new HashMap<>();
-        root.put("emp", emp);
-
-        // 拼接()内都表示当前对象
-        System.out.println(OgnlUtil.getValue(root, "emp.(id + ':' +  name + ':' + empNo)"));
-
-    }
-
-    /** 字面量测试 */
+    /** 常量(字面量)测试 */
     @Test
     public void testLiteral(){
-        Object root = new Object();
-        System.out.println("字符串(双引号):" + OgnlUtil.getValue(root, "\"hello, ognl\"").getClass());
-        System.out.println("字符串(单引号):" + OgnlUtil.getValue(root, "'hello, ognl'").getClass());
-        System.out.println("字符(单引号):" + OgnlUtil.getValue(root, "'h'").getClass());
-        System.out.println("整数:" + OgnlUtil.getValue(root, "123").getClass());
-        System.out.println("Float:" + OgnlUtil.getValue(root, "123.09f").getClass());
-        System.out.println("Double:" + OgnlUtil.getValue(root, "123.09D").getClass());
-        System.out.println("BigInteger:" + OgnlUtil.getValue(root, "123h").getClass());
-        System.out.println("BigDecimal:" + OgnlUtil.getValue(root, "123b").getClass());
-        System.out.println("布尔类型:" + OgnlUtil.getValue(root, "false").getClass());
-        System.out.println("空值类型:" + OgnlUtil.getValue(root, "null"));
+        // 字符串(双引号)
+        Assert.assertTrue(String.class.equals(OgnlUtil.getValue(null, "\"hello, ognl\"").getClass()));
+        // 字符串(单引号)
+        Assert.assertTrue(String.class.equals(OgnlUtil.getValue(null, "'hello, ognl'").getClass()));
+        // 字符(单引号)
+        Assert.assertTrue(Character.class.equals(OgnlUtil.getValue(null, "'h'").getClass()));
+        // 整数, 默认Integer
+        Assert.assertTrue(Integer.class.equals(OgnlUtil.getValue(null, "123").getClass()));
+        // 浮点数, 默认Double
+        Assert.assertTrue(Double.class.equals(OgnlUtil.getValue(null, "123.0").getClass()));
+        // 浮点数, Float
+        Assert.assertTrue(Float.class.equals(OgnlUtil.getValue(null, "123.0f").getClass()));
+        // 浮点数, 指定BigDecimal
+        Assert.assertTrue(BigDecimal.class.equals(OgnlUtil.getValue(null, "123.0b").getClass()));
+        // 浮点数, 指定Double
+        Assert.assertTrue(Double.class.equals(OgnlUtil.getValue(null, "123.0D").getClass()));
+        // 整数, 指定BigInteger
+        Assert.assertTrue(BigInteger.class.equals(OgnlUtil.getValue(null, "123h").getClass()));
+        // 布尔型
+        Assert.assertTrue(Boolean.class.equals(OgnlUtil.getValue(null, "true").getClass()));
+        // 空值类型
+        Assert.assertNull(OgnlUtil.getValue(null, "null"));
     }
+
+    /** 变量测试 */
+    @Test
+    public void testVariable(){
+        List<Integer> scores = Arrays.asList(99, 80, 70, 50);
+        Map<String, Object> root = new HashMap<>();
+        root.put("scores", scores);
+
+        // 自定义变量
+        System.out.println("平均分: " + OgnlUtil.getValue(root, "#scoreAvg = (scores[0] + scores[1] + scores[2] + scores[3])/scores.size , #scoreAvg > 60 ? '及格' : '不及格'"));
+
+    }
+
+    /** this变量测试 */
+    @Test
+    public void testThis(){
+        List<Integer> scores = Arrays.asList(99, 80, 70, 50);
+
+        // 自定义变量
+        System.out.println("size:" + OgnlUtil.getValue(scores, "#this.size()"));
+        System.out.println(OgnlUtil.getValue(scores, "#first = #this[0] , #first > 60 ? '及格' : '不及格'"));
+    }
+
 
     /** 静态方法,静态常量 测试 */
     @Test
@@ -77,21 +93,6 @@ public class OgnlUtilTest {
         System.out.println("size:" + OgnlUtil.getValue(books, "#this.size"));
         System.out.println("books[1]:" + OgnlUtil.getValue(books, "#this[1]"));
 
-    }
-
-    /** 变量测试 */
-    @Test
-    public void testVariable(){
-        List<String> books = Arrays.asList("java", "linux", "js", "css");
-        Map<String, Object> root = new HashMap<>();
-        root.put("books", books);
-
-        // 自定义变量
-        System.out.println(OgnlUtil.getValue(root, "#bookSize = books.size , #bookSize > 2 ? '多' : '少'"));
-
-        // 内置this变量
-        System.out.println("books size:" + OgnlUtil.getValue(books, "#this.size"));
-        System.out.println("books[1]:" + OgnlUtil.getValue(books, "#this[1]"));
     }
 
     @Test

@@ -7,8 +7,7 @@ import lombok.Setter;
  * @author zongf
  * @date 2020-06-03
  */
-@Setter
-@Getter
+@Setter @Getter
 public class Employee {
 
     private Integer id;
@@ -19,17 +18,12 @@ public class Employee {
 
     private Department department;
 
-    @Setter
-    @Getter
+    @Setter @Getter
     public static class Department{
 
         private String name;
 
         private String manager;
 
-    }
-
-    public String getFullName(){
-        return this.department.getName() + ":" + this.name;
     }
 }
