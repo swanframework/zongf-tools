@@ -11,7 +11,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Ognl 工具类
- *
  * @author zongf
  * @return Object
  */
@@ -118,10 +117,44 @@ public final class OgnlUtil {
         }
     }
 
+    /** 为表达式赋值 <br/>
+     *  当表达式不能表示赋值时, 会抛出异常
+     * @see #setValue(Object, String, Object, Boolean)
+     * @throws ognl.InappropriateExpressionException
+     */
+    public static void setValue(Object root, String expression, Object value) {
+        setValue(root, expression, value, true);
+    }
+
+    /** 表达式赋值 <br/>
+     *  当表达式不能表示赋值时, 会抛出异常
+     * @param root 起始对象
+     * @param expression 表达式
+     * @param value 值
+     * @param cacheExpression 缓存表达式
+     * @throws ognl.InappropriateExpressionException
+     * @author zongf
+     * @date 2020-06-03
+     */
+    public static void setValue(Object root, String expression, Object value, Boolean cacheExpression) {
+
+        try {
+            // 基于root创建上下文, 不允许修改context
+            Map context = Ognl.createDefaultContext(root, MEMBER_ACCESS);
+
+            // 解析表达式
+            Object exp = parseExpression(expression, cacheExpression);
+
+            // 赋值
+            Ognl.setValue(exp, context, root, value);
+        } catch (OgnlException e) {
+            throw new RuntimeException("ognl 表达式解析异常, 表达式:" + expression + "", e);
+        }
+    }
+
     /**
      * 解析表达式
-     *
-     * @param expression      表达式
+     * @param expression 表达式
      * @param cacheExpression
      * @return Object
      * @author zongf
@@ -139,41 +172,6 @@ public final class OgnlUtil {
             parsedExpression = Ognl.parseExpression(expression);
         }
         return parsedExpression;
-    }
-
-    /** 为表达式赋值 <br/>
-     *  当表达式不能表示赋值时, 会抛出异常
-     * @see #setValue(Object, String, String, Boolean)
-     * @throws ognl.InappropriateExpressionException
-     */
-    public static void setValue(Object root, String expression, String value) {
-        setValue(root, expression, value, true);
-    }
-
-    /** 表达式赋值 <br/>
-     *  当表达式不能表示赋值时, 会抛出异常
-     * @param root 起始对象
-     * @param expression 表达式
-     * @param value 值
-     * @param cacheExpression 缓存表达式
-     * @throws ognl.InappropriateExpressionException
-     * @author zongf
-     * @date 2020-06-03
-     */
-    public static void setValue(Object root, String expression, String value, Boolean cacheExpression) {
-
-        try {
-            // 基于root创建上下文, 不允许修改context
-            Map context = Ognl.createDefaultContext(root, MEMBER_ACCESS);
-
-            // 解析表达式
-            Object exp = parseExpression(expression, cacheExpression);
-
-            // 赋值
-            Ognl.setValue(exp, context, root, value);
-        } catch (OgnlException e) {
-            throw new RuntimeException("ognl 表达式解析异常, 表达式:" + expression + "", e);
-        }
     }
 
 }
