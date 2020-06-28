@@ -13,9 +13,7 @@ public interface ILocker {
      * @author zongf
      * @date 2020-05-15
      */
-    default public boolean lock(String lockName, long lockTime){
-        throw new UnsupportedOperationException();
-    };
+    public boolean lock(String lockName, long lockTime);
 
     /** 释放锁
      * @param lockName 锁名称
@@ -23,9 +21,7 @@ public interface ILocker {
      * @author zongf
      * @date 2020-05-15
      */
-    default public boolean unlock(String lockName){
-        throw new UnsupportedOperationException();
-    };
+    public boolean unlock(String lockName);
 
     /** 判断是否加锁
      * @param lockName 锁名称
