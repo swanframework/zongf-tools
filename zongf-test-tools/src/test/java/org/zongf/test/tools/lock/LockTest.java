@@ -5,9 +5,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.zongf.tools.common.lock.ILocker;
-import org.zongf.tools.common.utils.LockUtil;
-import org.zongf.tools.spring.utils.SpringContextUtil;
+import org.zongf.tools.spring.lock.ILocker;
+import org.zongf.tools.spring.utils.LockUtil;
 
 import java.time.LocalDateTime;
 

@@ -1,4 +1,4 @@
-package org.zongf.tools.common.lock;
+package org.zongf.tools.spring.lock;
 
 /** 应用锁
  * @author zongf
