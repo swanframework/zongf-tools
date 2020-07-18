@@ -13,6 +13,7 @@ modules=(
   "log-tools"
   "common-tools"
   "http-tools"
+  "baidu-tools"
   "encrypt-tools"
   "spring-tools"
 )

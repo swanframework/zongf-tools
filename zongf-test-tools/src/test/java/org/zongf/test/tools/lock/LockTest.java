@@ -24,11 +24,11 @@ public class LockTest {
     @Test
     public void test() throws Exception{
 
-        for (int i = 0; i < 10; i++) {
-            new Thread(() -> {
-                String name = LockUtil.execute(this::sayHello, "zhangsan", locker, "order101", 30);
-            }).start();
-        }
+//        for (int i = 0; i < 10; i++) {
+//            new Thread(() -> {
+//                String name = LockUtil.execute(this::sayHello, "zhangsan", locker, "order101", 30);
+//            }).start();
+//        }
 
         Thread.sleep(3000);
     }
